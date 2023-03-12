@@ -2,9 +2,12 @@
 //Call it when you're leaving to go eat food 
 
 import {
-	createAudioPlayer,
-	createAudioResource,
-	joinVoiceChannel,
+    getVoiceConnection,
+    joinVoiceChannel,
+    createAudioPlayer,
+    createAudioResource,
+    AudioPlayerStatus,
+    AudioPlayerError,
 } from '@discordjs/voice';
 import {
 	ChatInputApplicationCommandData,
@@ -12,13 +15,14 @@ import {
 	CacheType,
 	GuildMember,
 	Permissions,
+	VoiceState,
 } from 'discord.js';
 import { Bot } from '../Bot';
 import { Option, Subcommand } from './Option';
 import { SlashCommand } from './SlashCommand';
 
 export class Munch implements SlashCommand {
-	name: string = 'sicko';
+	name: string = 'munch';
 	description: string = 'Time to go munch some grub. But I will return.';
 	options: (Option | Subcommand)[] = [];
 	requiredPermissions: bigint[] = [Permissions.FLAGS.SEND_MESSAGES];
@@ -47,7 +51,7 @@ export class Munch implements SlashCommand {
 			connection.subscribe(audio);
 			const mirrormp3 = createAudioResource('./music/minecraft-eating-sound.mp3');
 			audio.play(mirrormp3);
-			interaction.reply('Someone has gone to munch a lunch.'); //change to unique display name!
+			interaction.reply(interaction.user.id+' has gone to munch a lunch.'); //change to unique display name!
 			return;
 		} catch (err) {
 			bot.logger.commandError(interaction.channel!.id, this.name, err);
