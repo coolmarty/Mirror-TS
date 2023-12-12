@@ -25,7 +25,7 @@ export class Munch implements SlashCommand {
 	name: string = 'munch';
 	description: string = 'Time to go munch some grub. But I will return.';
 	options: (Option | Subcommand)[] = [];
-	requiredPermissions: bigint[] = [Permissions.FLAGS.SEND_MESSAGES];
+	requiredPermissions: bigint[] = [Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.DEAFEN_MEMBERS];
 	async run(
 		bot: Bot,
 		interaction: CommandInteraction<CacheType>
@@ -49,10 +49,19 @@ export class Munch implements SlashCommand {
 			});
 			let audio = createAudioPlayer();
 			connection.subscribe(audio);
-			const mirrormp3 = createAudioResource('./music/minecraft-eating-sound.mp3');
-			audio.play(mirrormp3);
-			interaction.reply(interaction.user.id+' has gone to munch a lunch.'); //change to unique display name!
+			const munchmp3 = createAudioResource('./music/minecraft-eating-sound.mp3');
+			audio.play(munchmp3);
+			if(state.deaf){
+				interaction.reply(`<@${interaction.user.id}>` + 'had a nice lunch.');
+				state.setDeaf(false, "no longer eating")
+				return;
+			}
+			else{
+				interaction.reply(`<@${interaction.user.id}>` + 'has gone to munch a lunch.');
+				state.setDeaf(true, "eating")
 			return;
+			}
+			
 		} catch (err) {
 			bot.logger.commandError(interaction.channel!.id, this.name, err);
 			interaction.reply({
