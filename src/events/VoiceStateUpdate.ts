@@ -22,6 +22,7 @@ export class VoiceStateUpdate implements EventHandler {
 			if(newState.member?.user.id == newState.guild.me!.id){
 				if(!newState.channelId){
 					if(bot.player.getQueue(newState.guild)){
+						//@ts-ignore
 						bot.player.getQueue(newState.guild).destroy();
 						return; //if mirror disconnects, destroy the queue. the player.on('disconnect') event is not reliable
 					}
@@ -41,7 +42,7 @@ export class VoiceStateUpdate implements EventHandler {
 			connection = joinVoiceChannel({
 				channelId: newState.channelId!,
 				guildId: newState.guild.id,
-				adapterCreator: newState.guild.voiceAdapterCreator,
+				adapterCreator: newState.guild.voiceAdapterCreator as DiscordGatewayAdapterCreator,
 			});
 
 			//code copied from discord#9185

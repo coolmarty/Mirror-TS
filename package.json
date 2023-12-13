@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"name": "mirror-java",
 	"version": "1.0.0",
 	"description": "Mirror `Discord` Bot TypeScript edition",
@@ -34,4 +35,42 @@
 		"@types/mkdirp": "^1.0.2",
 		"@types/node-cron": "^3.0.1"
 	}
+=======
+    "name": "mirror-java",
+    "version": "1.0.0",
+    "description": "Mirror `Discord` Bot TypeScript edition",
+    "main": "built/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./built/src/index.js"
+    },
+    "author": "Ford Friedel",
+    "license": "ISC",
+    "dependencies": {
+        "@discordjs/opus": "^0.8.0",
+        "@discordjs/voice": "^0.8.0",
+        "chrono-node": "latest",
+        "cron": "latest",
+        "discord-player": "^5.2.2",
+        "discord.js": "^13.6.0",
+        "enmap": "^5.8.13",
+        "ffmpeg": "latest",
+        "ffmpeg-static": "^4.4.1",
+        "geo-tz": "latest",
+        "mkdirp": "latest",
+        "node-cron": "latest",
+        "node-fetch": "^2.6.1",
+        "pm2": "^5.2.0",
+        "tslog": "^3.3.2",
+        "tweetnacl": "latest",
+        "typescript": "latest",
+        "ytdl": "latest",
+        "ytdl-core": "^4.10.0"
+    },
+    "devDependencies": {
+        "@types/mkdirp": "^1.0.2",
+        "@types/node-cron": "^3.0.1",
+        "@types/node-fetch": "2.6.2"
+    }
+>>>>>>> cb25821 (change declarations)
 }

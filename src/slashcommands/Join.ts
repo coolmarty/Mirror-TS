@@ -5,6 +5,7 @@ import {
 	createAudioPlayer,
 	createAudioResource,
 	VoiceConnection,
+	DiscordGatewayAdapterCreator,
 } from '@discordjs/voice';
 import {
 	CacheType,
@@ -32,7 +33,7 @@ export class Join implements SlashCommand {
 			const connection = joinVoiceChannel({
 				channelId: state.channelId!,
 				guildId: interaction.guildId!,
-				adapterCreator: interaction.guild!.voiceAdapterCreator,
+				adapterCreator: interaction.guild!.voiceAdapterCreator as DiscordGatewayAdapterCreator,
 			});
 			//code copied from discord#9185
 			//@ts-ignore
